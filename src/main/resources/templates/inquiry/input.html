@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thmeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>問い合わせフォーム：入力</title>
+</head>
+<body>
+  <h1>お問い合わせフォーム：入力</h1>
+  <form th:action="@{/inquiry/}" th:object="${inquiryForm}" method="post">
+    <dl>
+    <dd><label for="name">お名前</label></dd>
+    <dd>
+        <input type="text" id="name" name="name" th:field="*{name}" th:errorclass="error-input" value="山田　太郎" />
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error!</span>
+    </dd>
+    
+    
+    <dd><label for="email">eメールアドレス</label></dd>
+    <dd>
+        <input type="text" id="email" name="email" th:field="*{email}" th:errorclass="error-input" value="example@example.co.jp" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>
+    </dd>
+    
+    <dd><label>項目</label></dd>
+    <dd><select id="type" name="type" th:field="*{type}">
+          <option th:each="type : ${T(com.example.Constant).getInstance().type_map.entrySet()}"
+                  th:value="${type.getKey()}"
+                  th:text="${type.getValue()}">サンプル項目</option>
+        </select>
+        <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}">error!</span>
+    </dd>
+    
+    <dd><label for="content">内容</label></dd>
+    <dd>
+        <textarea rows="" id="content" name="content" placeholder="問い合わせ内容を入力してください" th:field="*{content}"></textarea>
+        <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}">error!</span>
+    </dd>
+
+    <dd><input type="submit" name="confirm" value="確認"/></dd>
+    </dl>
+
+  </form>
+</body>
+</html>

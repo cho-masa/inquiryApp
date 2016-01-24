@@ -1,0 +1,32 @@
+!!com.example.Constant
+type_map:
+  1: 商品に関するお問い合わせ
+  2: ◯◯に関するお問い合わせ
+  3: その他
+pref_map:
+    cd1:
+      name: 東京都
+      cityList:
+      - cd: 1
+        name: 世田谷区
+      - cd: 2
+        name: 足立区
+      - cd: 3
+        name: 豊島区
+      - cd: 4
+        name: 東村山市
+    cd2:
+      name: 埼玉県
+      cityList:
+      - cd: 1
+        name: 所沢市
+      - cd: 2
+        name: さいたま市
+    cd3:
+      name: 大阪府
+      cityList:
+      - cd: 1
+        name: 大阪市
+      - cd: 2
+        name: 門真市
+

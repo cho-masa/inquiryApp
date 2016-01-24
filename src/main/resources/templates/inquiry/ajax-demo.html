@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thmeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>ajaxデモ画面</title>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="/js/demo.js"></script>
+</head>
+<body>
+  <h1>ajaxデモ画面</h1>
+  <p>都道府県を変更したタイミングで市区町村を作り直します(ajax)</p>
+  
+  都道府県：
+  <select id="pref" name="pref">
+    <option value="">---</option>
+    <option th:each="pref : ${T(com.example.Constant).getInstance().pref_map.entrySet()}"
+            th:selected="${pref.key} == ${prefCd}"
+            th:value="${pref.key}"
+            th:text="${pref.value.name}">サンプル県
+    </option>
+  </select>
+  
+  市区町村：
+  <select id="city" name="city">
+    <option value="">---</option>
+    <option th:each="city : ${cities}"
+            th:selected="${city.cd} == ${cityCd}"
+            th:value="${city.cd}"
+            th:text="${city.name}">サンプル市
+    </option>
+  </select>
+</body>
+</html>
