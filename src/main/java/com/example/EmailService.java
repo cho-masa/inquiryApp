@@ -13,6 +13,8 @@ public class EmailService {
   private MailSender mailSender;
 
   public void sendSimpleMail(SimpleMailMessage mailMessage) {
-    mailSender.send(mailMessage);
+    if (mailMessage == null) { // test用判定　設定ファイルでON/OFF切り替えるようにする
+      mailSender.send(mailMessage);
+    }
   }
 }

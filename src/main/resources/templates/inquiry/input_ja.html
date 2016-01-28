@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thmeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>問い合わせフォーム：入力</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="/js/demo.js"></script>
+
+
+</head>
+<body>
+
+  <a href="/inquiry/?lang=ja">日本語</a>
+  <a href="/inquiry/?lang=en">英語</a>
+  
+  
+  <h1>お問い合わせフォーム：入力(日本語)</h1>
+  <form th:action="@{/inquiry/}" th:object="${inquiryForm}" method="post">
+    <dl>
+    <dd><label for="name">お名前</label></dd>
+    <dd>
+        <input type="text" id="name" name="name" th:field="*{name}" th:errorclass="error-input" value="山田　太郎" />
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-messages">error!</span>
+    </dd>
+    <dd><label for="inputfemail">eメールアドレス</label></dd>
+    <dd>
+        <input type="email" id="inputfemail" name="email" th:field="*{email}" th:errorclass="error-input" value="山田　太郎" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-messages">error!</span>
+    </dd>
+    
+    <dd><label>項目</label></dd>
+    <dd><select id="type" name="type" th:field="*{type}" th:errorclass="error-input" >
+          <option value="">---</option>
+          <option th:each="type : ${T(com.example.Constant).getInstance().type_map.entrySet()}"
+                  th:value="${type.getKey()}"
+                  th:text="${type.getValue()}">サンプル項目</option>
+        </select>
+        <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="error-messages">error!</span>
+    </dd>
+    
+    <dd><label for="content">内容</label></dd>
+    <dd>
+        <textarea rows="" id="content" name="content" placeholder="問い合わせ内容を入力してください" th:field="*{content}" th:errorclass="error-input" ></textarea>
+        <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="error-messages">error!</span>
+    </dd>
+
+
+    <dd>都道府県</dd>
+    
+    <dd><select id="pref" name="pref" th:field="*{pref}" th:errorclass="error-input" >
+        <option value="">---</option>
+        <option th:each="p : ${T(com.example.Constant).getInstance().pref_map.entrySet()}"
+                th:value="${p.key}"
+                th:text="${p.value.name}">サンプル県
+        </option>
+      </select>
+      <span th:if="${#fields.hasErrors('pref')}" th:errors="*{pref}" class="error-messages">error!</span>
+    </dd>
+    <dd>市区町村</dd>
+    <dd><select id="city" name="city" th:field="*{city}" th:errorclass="error-input" >
+        <option value="">---</option>
+        <option th:each="c: ${cities}"
+                th:value="${c.cd}"
+                th:text="${c.name}">サンプル市
+        </option>
+      </select>
+      <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="error-messages">error!</span>
+    </dd>
+
+    <dd><input type="submit" name="confirm" value="確認"/></dd>
+    </dl>
+
+  </form>
+</body>
+</html>

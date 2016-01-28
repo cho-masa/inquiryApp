@@ -11,7 +11,7 @@ $(function(){
             $("#city").append("<option value=" + data[i].cd + ">" + data[i].name + "</option>");
         }
       }).fail(function(data){
-        alert("error!");
+        alert("error! ");
       });
   })
 });
