@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thmeleaf.org">
 <head>
 <meta charset="UTF-8"/>
-<title>問い合わせフォーム：確認</title>
+<title th:text="#{confirm.title}">問い合わせフォーム：確認x</title>
 </head>
 <body>
-  <h1>お問い合わせフォーム：確認(日本語)</h1>
+  <h1 th:text="#{confirm.h1}">お問い合わせフォーム：確認(日本語)x</h1>
   <form id="inquiryForm" th:action="@{/inquiry/}" th:object="${inquiryForm}" method="post">
     <dl>
       <dd th:text="*{name}"></dd>
@@ -15,8 +15,8 @@
       <dd th:text="*{pref}"></dd>
       <dd th:text="*{city}"></dd>
       <dd>
-        <input type="submit" id="back" name="goToInput" value="戻る"/>
-        <input type="submit" id="send" name="send" value="送信"/>
+        <input type="submit" id="back" name="goToInput" th:value="#{back.button}"/>
+        <input type="submit" id="send" name="send" th:value="#{send.button}"/>
       </dd>
     </dl>
 

@@ -2,7 +2,6 @@ package com.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -39,7 +38,7 @@ public class PageController {
   
   // 入力画面：表示
   @RequestMapping(value="inquiry/")
-  String input(Model model, InquiryForm form, Locale locale) {
+  String input(Model model, InquiryForm form) {
 
     String prefCd = form.getPref();
     if (StringUtils.isEmpty(prefCd)) {
@@ -48,38 +47,25 @@ public class PageController {
     PrefInfo prefInfo = Constant.getInstance().pref_map.get(prefCd);
     List<CityInfo> cityList = prefInfo == null ? new ArrayList<CityInfo>() : prefInfo.getCityList();
     model.addAttribute("cities", cityList);
-    
-    System.out.println("locale=" + getLocaleNm(locale));
-
-    return "inquiry/input_" + getLocaleNm(locale);
-  }
-  
-  // AppUtilsに移行
-  public String getLocaleNm(Locale locale) {
-    String localeNm = "JP";
-    if (locale != null) {
-      // Enum型でチェック
-      localeNm = locale.getLanguage();
-    }
-    return localeNm.toLowerCase();
+    return "inquiry/input";
   }
   
   // 入力画面：確認ボタン押下
   @RequestMapping(value="inquiry/", params="confirm", method = RequestMethod.POST)
-  String confirm(@Validated InquiryForm form, BindingResult result, Model model, Locale locale) {
+  String confirm(@Validated InquiryForm form, BindingResult result, Model model) {
     // エラーチェック
     if (result.hasErrors()) {
-      return input(model, form, locale);
+      return input(model, form);
     }
-    return "inquiry/confirm_" + getLocaleNm(locale);
+    return "inquiry/confirm";
   }
   
   // 確認画面：送信ボタン押下
   @RequestMapping(value="inquiry/", params="send", method = RequestMethod.POST)
-  String send(@Validated InquiryForm form, BindingResult result, Model model, Locale locale) {
+  String send(@Validated InquiryForm form, BindingResult result, Model model) {
     // エラーチェック
     if (result.hasErrors()) {
-      return input(model, form, locale);
+      return input(model, form);
      }
 
     // メール送信
@@ -96,14 +82,14 @@ public class PageController {
   
   // 確認画面：戻るボタン押下
   @RequestMapping(value="inquiry/", params="goToInput")
-  String goToInput(@Validated InquiryForm form, BindingResult result, Model model, Locale locale) {
-
-    return input(model, form, locale);
+  String goToInput(@Validated InquiryForm form, BindingResult result, Model model) {
+    // 確認画面へ遷移
+    return input(model, form);
   }
   
   // 完了画面：表示
   @RequestMapping(value="inquiry/", params="comp")
-  String comp(Locale locale) {
-    return "inquiry/comp_" + getLocaleNm(locale);
+  String comp() {
+    return "inquiry/comp";
   }
 }
