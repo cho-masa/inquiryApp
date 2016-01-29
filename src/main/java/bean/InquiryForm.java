@@ -1,15 +1,17 @@
 package bean;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.example.validator.Confirm;
+
 import lombok.Data;
 
 @Data
+@Confirm(field = "email")
 public class InquiryForm {
   // 名前
   @NotNull
@@ -21,6 +23,11 @@ public class InquiryForm {
   @NotBlank
   @Email
   private String email;
+  // eメール
+  @NotNull
+  @NotBlank
+  @Email
+  private String confirmEmail;
   // 問い合わせ項目
   @NotNull
   @NotBlank

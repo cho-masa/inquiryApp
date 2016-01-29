@@ -29,6 +29,12 @@
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-messages">error!</span>
     </dd>
     
+    <dd><label for="confirmEmail" th:text="#{confirmEmail.label}">eメールアドレスx</label></dd>
+    <dd>
+        <input type="email" id="confirmEmail" name="confirmEmail" th:field="*{confirmEmail}" th:errorclass="error-input" value="山田　太郎" />
+        <span th:if="${#fields.hasErrors('confirmEmail')}" th:errors="*{confirmEmail}" class="error-messages">error!</span>
+    </dd>
+    
     <dd><label th:text="#{type.label}">項目x</label></dd>
     <dd><select id="type" name="type" th:field="*{type}" th:errorclass="error-input" >
           <option value="">---</option>
