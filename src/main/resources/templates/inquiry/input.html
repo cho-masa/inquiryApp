@@ -23,11 +23,18 @@
         <input type="text" id="name" name="name" th:field="*{name}" th:errorclass="error-input" value="山田　太郎" />
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-messages">error!</span>
     </dd>
+    <dd><label for="phonenumber" th:text="#{phonenumber.label}">電話番号x</label></dd>
+    <dd>
+        <input type="tel" id="phonenumber" name="phonenumber" th:field="*{phonenumber}" th:errorclass="error-input" value="03123456789" />
+        <span th:if="${#fields.hasErrors('phonenumber')}" th:errors="*{phonenumber}" class="error-messages">error!</span>
+    </dd>
+
     <dd><label for="inputfemail" th:text="#{email.label}">eメールアドレスx</label></dd>
     <dd>
         <input type="email" id="inputfemail" name="email" th:field="*{email}" th:errorclass="error-input" value="山田　太郎" />
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-messages">error!</span>
     </dd>
+
     
     <dd><label for="confirmEmail" th:text="#{confirmEmail.label}">eメールアドレスx</label></dd>
     <dd>
