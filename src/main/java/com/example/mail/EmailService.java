@@ -1,4 +1,4 @@
-package com.example;
+package com.example.mail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;

@@ -37,8 +37,8 @@ public class InquiryMailBuilder {
 
   public SimpleMailMessage create() {
     SimpleMailMessage mailMessage = new SimpleMailMessage();
-    mailMessage.setFrom("test@test.com");
-    mailMessage.setTo("test@test.com");
+    mailMessage.setFrom("fromuser@test.co.jp");
+    mailMessage.setTo("touser@test.co.jp");
     mailMessage.setSubject("test mail");
     
     Constant constant = Constant.getInstance();

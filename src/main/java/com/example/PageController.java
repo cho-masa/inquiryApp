@@ -18,6 +18,10 @@ import bean.CityInfo;
 import bean.PrefInfo;
 import bean.InquiryForm;
 
+import com.example.mail.Email1Service;
+import com.example.mail.Email2Service;
+import com.example.mail.Email3Service;
+import com.example.mail.EmailService;
 import com.example.mail.InquiryMailBuilder;
 import com.example.mail.VelocityUtils;
 
@@ -33,8 +37,21 @@ public class PageController {
   @Autowired
   private VelocityUtils velocityUtils;
   
+  // メールサービス(SpringBoot Starter mail from web sample code)
   @Autowired
   private EmailService emailService;
+
+  // メールサービス(JavaMail from web sample code)
+  @Autowired
+  private Email1Service email1Service;
+
+  // メールサービス(SpringBoot Starter mail from Reference part1)
+  @Autowired
+  private Email2Service email2Service;
+
+  // メールサービス(SpringBoot Starter mail from web sample code part2)
+  @Autowired
+  private Email3Service email3Service;
   
   // 入力画面：表示
   @RequestMapping(value="inquiry")
@@ -69,12 +86,8 @@ public class PageController {
      }
 
     // メール送信
-    SimpleMailMessage mailMessage = InquiryMailBuilder.build()
-        .setForm(form)
-        .setVelocityUtils(velocityUtils)
-        .setTemplateLocation("inquiry/mail-body.vm")
-        .create();
-    emailService.sendSimpleMail(mailMessage);;
+    String type = "";
+    sendmail(type, form);
 
     // 完了画面へ遷移
     return "redirect:/inquiry?comp";
@@ -92,4 +105,44 @@ public class PageController {
   String comp() {
     return "inquiry/comp";
   }
+
+
+  private void sendmail(String type, InquiryForm form) {
+    switch (type) {
+    case "1":
+      sendmail1(form);
+      break;
+    case "2":
+      sendmail2(form);
+      break;
+    case "3":
+      sendmail3(form);
+      break;
+    default:
+      sendmail(form);
+      break;
+    }
+  }
+
+  private void sendmail(InquiryForm form) {
+    SimpleMailMessage mailMessage = InquiryMailBuilder.build()
+        .setForm(form)
+        .setVelocityUtils(velocityUtils)
+        .setTemplateLocation("inquiry/mail-body.vm")
+        .create();
+    emailService.sendSimpleMail(mailMessage);;
+  }
+
+  private void sendmail1(InquiryForm form) {
+    email1Service.sendJavaMail(form, "inquiry/mail-body.vm");
+  }
+  
+  private void sendmail2(InquiryForm form) {
+    email2Service.sendSimpleMail(form, "inquiry/mail-body.vm");
+  }
+  
+  private void sendmail3(InquiryForm form) {
+    email3Service.sendSimpleMail(form, "inquiry/mail-body.vm");
+  }
+
 }
