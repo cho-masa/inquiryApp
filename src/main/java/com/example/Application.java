@@ -31,18 +31,28 @@ public class Application extends WebMvcAutoConfigurationAdapter{
     @Bean 
     public CookieLocaleResolver localeResolver() { 
             CookieLocaleResolver localeResolver = new CookieLocaleResolver(); 
+            localeResolver.setCookieName("INQUIRY_LOCALE");
             localeResolver.setDefaultLocale(Locale.JAPAN); 
             return localeResolver; 
     }
+    
+    // URLパラメータによるロケール切り替えクラス
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+      LocaleChangeInterceptor i = new LocaleChangeInterceptor();
+      i.setParamName("lang");
+      return i;
+    }
+    
+//    // URL(パス)によるロケール切り替えクラス
+//    @Bean
+//    public LocaleChangeInterceptor localeChangeInterceptor() {
+//      LocaleChangeInterceptor i = new LocaleChangeInterceptor();
+//      i.setParamName("locale");
+//      return i;
+//    }
 	
-	
-	@Bean
-	public LocaleChangeInterceptor localeChangeInterceptor() {
-	  LocaleChangeInterceptor i = new LocaleChangeInterceptor();
-	  i.setParamName("lang");
-	  return i;
-	}
-	
+	// インターセプターの登録
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 	  registry.addInterceptor(localeChangeInterceptor());

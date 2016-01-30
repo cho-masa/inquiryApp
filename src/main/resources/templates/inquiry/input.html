@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thmeleaf.org">
+<html xmlns:th="http://www.thmeleaf.org" 
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
 <head>
 <meta charset="UTF-8"/>
-<title th:text="#{input.title}">サンプルタイトルx</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+<title th:text="#{input-page.title}">サンプルタイトルx</title>
+<link rel="stylesheet" type="text/css" href="../../static/css/app.css" th:href="@{/css/app.css}"/>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
-<script type="text/javascript" src="/js/demo.js"></script>
+<script type="text/javascript" src="../../static/js/app.js" th:src="@{/js/app.js}" ></script>
 
 
 </head>
 <body>
 
-  <a href="/inquiry/?lang=ja">日本語</a>
-  <a href="/inquiry/?lang=en">英語</a>
-  
-  
-  <h1 th:text="#{input.h1}">お問い合わせフォーム：入力(日本語)x</h1>
-  <form th:action="@{/inquiry/}" th:object="${inquiryForm}" method="post">
+  <div id="langselect">
+    <a href="input.html?lang=ja" th:href="@{/inquiry?lang=ja}" th:class="${lang} == 'ja' ? 'active'">日本語</a>　
+    <a href="input.html?lang=en" th:href="@{/inquiry?lang=en}" th:class="${lang} == 'en' ? 'active'">Engulish</a>　
+    <a href="input.html?lang=zh" th:href="@{/inquiry?lang=zh}" th:class="${lang} == 'zh' ? 'active'">中文</a>　
+    <a href="input.html?lang=ko" th:href="@{/inquiry?lang=ko}" th:class="${lang} == 'ko' ? 'active'">한국어 </a>　
+    <a href="input.html?lang=fr" th:href="@{/inquiry?lang=fr}" th:class="${lang} == 'fr' ? 'active'">Français</a>　
+    <a href="input.html?lang=es" th:href="@{/inquiry?lang=es}" th:class="${lang} == 'es' ? 'active'">Español</a>
+  </div>
+  <h1 th:text="#{input-page.h1}">お問い合わせフォーム：入力(日本語)x</h1>
+  <form th:action="@{/inquiry}" th:object="${inquiryForm}" method="post">
     <dl>
     <dd><label for="name" th:text="#{name.label}">お名前x</label></dd>
     <dd>
@@ -31,14 +38,14 @@
 
     <dd><label for="inputfemail" th:text="#{email.label}">eメールアドレスx</label></dd>
     <dd>
-        <input type="email" id="inputfemail" name="email" th:field="*{email}" th:errorclass="error-input" value="山田　太郎" />
+        <input type="email" id="inputfemail" name="email" th:field="*{email}" th:errorclass="error-input" value="test@test.co.jp" />
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-messages">error!</span>
     </dd>
 
     
     <dd><label for="confirmEmail" th:text="#{confirmEmail.label}">eメールアドレスx</label></dd>
     <dd>
-        <input type="email" id="confirmEmail" name="confirmEmail" th:field="*{confirmEmail}" th:errorclass="error-input" value="山田　太郎" />
+        <input type="email" id="confirmEmail" name="confirmEmail" th:field="*{confirmEmail}" th:errorclass="error-input" value="test@test.co.jp" />
         <span th:if="${#fields.hasErrors('confirmEmail')}" th:errors="*{confirmEmail}" class="error-messages">error!</span>
     </dd>
     
@@ -46,7 +53,7 @@
     <dd><select id="type" name="type" th:field="*{type}" th:errorclass="error-input" >
           <option value="">---</option>
           <option th:each="type : ${T(com.example.Constant).getInstance().type_map.entrySet()}"
-                  th:value="${type.getKey()}"
+                  th:value="${type.getKey()}" value="dummy1"
                   th:text="${type.getValue()}">サンプル項目</option>
         </select>
         <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="error-messages">error!</span>
@@ -64,9 +71,8 @@
     <dd><select id="pref" name="pref" th:field="*{pref}" th:errorclass="error-input" >
         <option value="">---</option>
         <option th:each="p : ${T(com.example.Constant).getInstance().pref_map.entrySet()}"
-                th:value="${p.key}"
-                th:text="${p.value.name}">サンプル県
-        </option>
+                th:value="${p.key}" value="cd1"
+                th:text="${p.value.name}">東京都</option>
       </select>
       <span th:if="${#fields.hasErrors('pref')}" th:errors="*{pref}" class="error-messages">error!</span>
     </dd>

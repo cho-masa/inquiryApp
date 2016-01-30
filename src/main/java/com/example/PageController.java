@@ -37,7 +37,7 @@ public class PageController {
   private EmailService emailService;
   
   // 入力画面：表示
-  @RequestMapping(value="inquiry/")
+  @RequestMapping(value="inquiry")
   String input(Model model, InquiryForm form) {
 
     String prefCd = form.getPref();
@@ -51,7 +51,7 @@ public class PageController {
   }
   
   // 入力画面：確認ボタン押下
-  @RequestMapping(value="inquiry/", params="confirm", method = RequestMethod.POST)
+  @RequestMapping(value="inquiry", params="confirm", method = RequestMethod.POST)
   String confirm(@Validated InquiryForm form, BindingResult result, Model model) {
     // エラーチェック
     if (result.hasErrors()) {
@@ -61,7 +61,7 @@ public class PageController {
   }
   
   // 確認画面：送信ボタン押下
-  @RequestMapping(value="inquiry/", params="send", method = RequestMethod.POST)
+  @RequestMapping(value="inquiry", params="send", method = RequestMethod.POST)
   String send(@Validated InquiryForm form, BindingResult result, Model model) {
     // エラーチェック
     if (result.hasErrors()) {
@@ -77,18 +77,18 @@ public class PageController {
     emailService.sendSimpleMail(mailMessage);;
 
     // 完了画面へ遷移
-    return "redirect:/inquiry/?comp";
+    return "redirect:/inquiry?comp";
   }
   
   // 確認画面：戻るボタン押下
-  @RequestMapping(value="inquiry/", params="goToInput")
+  @RequestMapping(value="inquiry", params="goToInput")
   String goToInput(@Validated InquiryForm form, BindingResult result, Model model) {
     // 確認画面へ遷移
     return input(model, form);
   }
   
   // 完了画面：表示
-  @RequestMapping(value="inquiry/", params="comp")
+  @RequestMapping(value="inquiry", params="comp")
   String comp() {
     return "inquiry/comp";
   }

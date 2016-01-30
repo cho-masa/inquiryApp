@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thmeleaf.org">
+<html xmlns:th="http://www.thmeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
 <head>
 <meta charset="UTF-8"/>
-<title th:text="#{confirm.title}">問い合わせフォーム：確認x</title>
+<title th:text="#{confirm-page.title}">問い合わせフォーム：確認x</title>
 </head>
 <body>
-  <h1 th:text="#{confirm.h1}">お問い合わせフォーム：確認(日本語)x</h1>
-  <form id="inquiryForm" th:action="@{/inquiry/}" th:object="${inquiryForm}" method="post">
+  <h1 th:text="#{confirm-page.h1}">お問い合わせフォーム：確認(日本語)x</h1>
+  <form id="inquiryForm" th:action="@{/inquiry}" th:object="${inquiryForm}" method="post">
     <dl>
       <dd th:text="*{name}"></dd>
       <dd th:text="*{email}"></dd>

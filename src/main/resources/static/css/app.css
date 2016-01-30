@@ -1,0 +1,18 @@
+.error-input {
+	border-color: #b94a48;
+	margin-left: 5px;
+}
+.error-messages {
+	color: #b94a48;
+}
+
+#langselect {
+	
+}
+#langselect .active {
+  font-size: 16pt;
+  font-weight:bold;
+  pointer-events: none;
+  cursor: default;
+  text-decoration:none;
+}

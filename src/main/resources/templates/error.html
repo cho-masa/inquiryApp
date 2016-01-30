@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thmeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
 <head>
 <meta charset="UTF-8"/>
-<title>Error page</title>
+<title th:text="#{error-page.title}">エラーページ</title>
 </head>
 <body>
-<h1>エラーが発生しました。</h1>
-しばらくしてからアクセスしてください。
+  <h1 th:text="#{error-page.h1}">エラーが発生しました</h1>
+  <span th:text="#{error-page.message}">ご迷惑をおかけしますが、時間をあけてからアクセスしてください。</span>
+  <br/><br/>
+  <a href="/inquiry/" th:text="#{back.input.link}">入力画面へ戻る</a>
 </body>
 </html>
