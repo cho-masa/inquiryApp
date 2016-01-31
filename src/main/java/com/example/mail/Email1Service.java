@@ -70,6 +70,9 @@ public class Email1Service {
         model.put("type", constant.type_map.get(form.getType()));
         model.put("content", form.getContent());
         mimeMessage.setText(velocityUtils.merge(templateLocation, model));
+        
+        // test code
+        System.out.println(mimeMessage.toString());
       }
     };
     // 送信

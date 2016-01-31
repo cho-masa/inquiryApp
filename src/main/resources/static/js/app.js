@@ -8,7 +8,7 @@ $(function(){
         $("#city").html("");
         $("#city").append("<option value=''>---</option>");
         for (var i = 0; i < data.length; i++) {
-            $("#city").append("<option value=" + data[i].cd + ">" + data[i].name + "</option>");
+            $("#city").append("<option value=" + data[i] + ">" + data[i] + "</option>");
         }
       }).fail(function(data){
         alert("error! ");

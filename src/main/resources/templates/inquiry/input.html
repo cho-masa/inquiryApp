@@ -70,9 +70,9 @@
     
     <dd><select id="pref" name="pref" th:field="*{pref}" th:errorclass="error-input" >
         <option value="">---</option>
-        <option th:each="p : ${T(com.example.Constant).getInstance().pref_map.entrySet()}"
-                th:value="${p.key}" value="cd1"
-                th:text="${p.value.name}">東京都</option>
+        <option th:each="p : ${T(com.example.Constant).getInstance().getAreaMap(lang).entrySet()}"
+                th:value="${p.key}" value="tokyo"
+                th:text="${p.key}">東京都</option>
       </select>
       <span th:if="${#fields.hasErrors('pref')}" th:errors="*{pref}" class="error-messages">error!</span>
     </dd>
@@ -80,8 +80,8 @@
     <dd><select id="city" name="city" th:field="*{city}" th:errorclass="error-input" >
         <option value="">---</option>
         <option th:each="c: ${cities}"
-                th:value="${c.cd}"
-                th:text="${c.name}">サンプル市
+                th:value="${c}"
+                th:text="${c}">サンプル市
         </option>
       </select>
       <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="error-messages">error!</span>

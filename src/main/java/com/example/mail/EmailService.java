@@ -11,10 +11,12 @@ public class EmailService {
 
   @Autowired
   private MailSender mailSender;
-
+  
   public void sendSimpleMail(SimpleMailMessage mailMessage) {
-    if (mailMessage == null) { // test用判定　設定ファイルでON/OFF切り替えるようにする
-      mailSender.send(mailMessage);
-    }
+
+    // test code
+    System.out.println(mailMessage.toString());
+    
+    //mailSender.send(mailMessage);
   }
 }
