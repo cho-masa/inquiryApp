@@ -69,6 +69,7 @@ public class PageController {
   String confirm(@Validated InquiryForm form, BindingResult result, Model model, Locale locale) {
     // エラーチェック
     if (result.hasErrors()) {
+      
       return input(model, form, locale);
     }
     return "inquiry/confirm";

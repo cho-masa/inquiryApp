@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thmeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+<head>
+<meta charset="UTF-8"/>
+<title th:text="#{error-page.title}">hello</title>
+</head>
+<body>
+  <h1 th:text="#{error-page.h1}">hello</h1>
+</body>
+</html>
