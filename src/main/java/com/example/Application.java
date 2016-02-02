@@ -2,10 +2,15 @@ package com.example;
 
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -59,4 +64,33 @@ public class Application extends WebMvcAutoConfigurationAdapter{
 	}
 	
 	
+	
+	@Autowired
+	MessageSource messageSource;
+
+	@Bean
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+        bean.setValidationMessageSource(this.messageSource);
+        return bean;
+    }
+    
+    /**
+     * ValidationのメッセージをUTF-8で管理します。
+     * @return
+     */
+    public MessageSource messageSource()
+    {
+        ReloadableResourceBundleMessageSource bean = new ReloadableResourceBundleMessageSource();
+        bean.setBasename("classpath:ValidationMessages");
+        bean.setDefaultEncoding("UTF-8");
+        return bean;
+    }
+    
+    
+    @Override
+    public Validator getValidator()
+    {
+        return validator();
+    }
 }
