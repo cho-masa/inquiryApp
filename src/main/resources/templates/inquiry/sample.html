@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thmeleaf.org" 
+      th:with="lang=${#locale.language}"
+      
+      th:lang="${lang}">
+
+<head>
+<meta charset="UTF-8"/>
+<title th:text="#{input-page.title}">サンプルタイトルx</title>
+<link rel="stylesheet" type="text/css" href="../../static/css/app.css" th:href="@{/css/app.css}"/>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="../../static/js/app.js" th:src="@{/js/app.js}" ></script>
+
+
+</head>
+<body>
+
+  <h1>message.propertiesから値を取得</h1>
+  <a th:href="#{http.host.zh}" th:text="#{http.host.zh}">sample</a><br/>
+  <a th:href="#{http.host.ko}" th:text="#{http.host.ko}">sample</a><br/>
+  <br/><br/>
+  
+  
+  <h1>Springのpropertieファイル（application.propertiesなど）から値を取得</h1>
+  <a th:href="${@environment.getProperty('http.host.zh2')}" th:text="${@environment.getProperty('http.host.zh2')}">sample</a><br/>
+  <br/><br/>
+
+  <div id="langselect">
+    <a href="input.html?lang=ja" th:href="@{/inquiry?lang=ja}" th:class="${lang} == 'ja' ? 'active'">日本語</a>　
+    <a href="input.html?lang=en" th:href="@{/inquiry?lang=en}" th:class="${lang} == 'en' ? 'active'">Engulish</a>　
+    <a href="input.html?lang=zh" th:href="@{/inquiry?lang=zh}" th:class="${lang} == 'zh' ? 'active'">中文</a>　
+    <a href="input.html?lang=ko" th:href="@{/inquiry?lang=ko}" th:class="${lang} == 'ko' ? 'active'">한국어 </a>　
+    <a href="input.html?lang=fr" th:href="@{/inquiry?lang=fr}" th:class="${lang} == 'fr' ? 'active'">Français</a>　
+    <a href="input.html?lang=es" th:href="@{/inquiry?lang=es}" th:class="${lang} == 'es' ? 'active'">Español</a>
+  </div>
+
+</body>
+</html>
